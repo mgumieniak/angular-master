@@ -44,14 +44,15 @@ export class AuthFormComponent implements AfterContentInit, AfterViewInit {
 
   @Output() submitted: EventEmitter<User> = new EventEmitter<User>();
 
-  constructor(private cd: ChangeDetectorRef) {}
+  constructor(private cd: ChangeDetectorRef) {} // Checks this view and its children.
+                                                // Use in combination with detach to implement local change detection checks.
 
-  ngAfterViewInit() {
+  ngAfterViewInit() { // change in specific Hook method
     if (this.message) {
       this.message.forEach((message) => {
         message.days = 30;
       });
-      this.cd.detectChanges();
+      this.cd.detectChanges(); // Without: Expression has changed after it was checked. Previous value: '7'. Current value: '30'
     }
   }
 
