@@ -25,16 +25,3 @@ export class AppComponent implements AfterViewInit {
     component.changeDetectorRef.detectChanges();
   }
 }
-
-// Below code is simpler, but we cannot pass inputs to created components
-// @Component({
-//   selector: 'app-root',
-//   template: `
-//     <div>
-//       <ng-container *ngComponentOutlet="component"></ng-container>
-//     </div>
-//   `
-// })
-// export class AppComponent {
-//   public component = AuthFormComponent;
-// }
