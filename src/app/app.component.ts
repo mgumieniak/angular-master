@@ -6,7 +6,13 @@ import {User} from './auth-form/auth-form.interface';
   selector: 'app-root',
   template: `
     <div>
-      <ng-container #entry></ng-container>
+      <button (click)="destroyComponent()">
+        Destroy
+      </button>
+      <button (click)="moveComponent()">
+        Move
+      </button>
+      <div #entry></div>
     </div>
   `
 })
@@ -23,7 +29,10 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     const authFormFactory = this.resolver.resolveComponentFactory(AuthFormComponent);
-    this.compRef = this.entry.createComponent(authFormFactory);
+    this.entry.createComponent(authFormFactory)
+      .changeDetectorRef.detectChanges();
+
+    this.compRef = this.entry.createComponent(authFormFactory, 0);
     this.compRef.instance.title = 'Create account';
     this.compRef.instance.submitted.subscribe(this.loginUser);
     this.compRef.changeDetectorRef.detectChanges();
@@ -31,7 +40,17 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   loginUser = (user: User): void => {
     console.log('Login', user);
-  }
+  };
+
+  destroyComponent = (): void => {
+    if (this.compRef) {
+      this.compRef.destroy();
+    }
+  };
+
+  moveComponent = () => {
+    this.entry.move(this.compRef.hostView, 1);
+  };
 
   ngOnDestroy(): void {
     if (this.compRef) {
