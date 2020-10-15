@@ -30,10 +30,10 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     const authFormFactory = this.resolver.resolveComponentFactory(AuthFormComponent);
     this.entry.createComponent(authFormFactory)
-      .changeDetectorRef.detectChanges();
+      .changeDetectorRef.detectChanges();    // The first component (LOGIN)
 
-    this.compRef = this.entry.createComponent(authFormFactory, 0);
-    this.compRef.instance.title = 'Create account';
+    this.compRef = this.entry.createComponent(authFormFactory, 0); // The second component (Create account)
+    this.compRef.instance.title = 'Create account'; // change component variable (name to create account)
     this.compRef.instance.submitted.subscribe(this.loginUser);
     this.compRef.changeDetectorRef.detectChanges();
   }
