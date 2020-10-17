@@ -1,7 +1,7 @@
 import { Directive, Input, ViewContainerRef, TemplateRef } from '@angular/core';
 
 @Directive({
-  selector: '[myFor][myForOf]'
+  selector: '[myFor]'
 })
 export class MyForDirective {
 
@@ -20,5 +20,4 @@ export class MyForDirective {
     private view: ViewContainerRef,
     private template: TemplateRef<any>
   ) {}
-
 }
