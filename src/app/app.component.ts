@@ -1,22 +1,19 @@
-import {AfterViewInit, Component, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   template: `
     <div>
-      <ng-container
-        [ngTemplateOutlet]="tmpl"
-        [ngTemplateOutletContext]="ctx">
-      </ng-container>
+      <label>
+        Credit Card Number
+        <input
+          name="credit-card"
+          type="text"
+          placeholder="Enter your 16-digit card number"
+          credit-card>
+      </label>
     </div>
-    <ng-template #tmpl let-name let-location="location">
-      {{ name }} : {{ location }}
-    </ng-template>
   `
 })
 export class AppComponent {
-  ctx = {
-    $implicit: 'Todd Motto',
-    location: 'England, UK'
-  };
 }
