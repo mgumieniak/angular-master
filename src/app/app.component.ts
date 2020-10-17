@@ -5,10 +5,11 @@ import {AfterViewInit, Component, TemplateRef, ViewChild, ViewContainerRef} from
   template: `
     <div>
       <ng-container #entry></ng-container>
-      <ng-template #tmpl>
-        Todd Motto : England, UK
-      </ng-template>
     </div>
+
+    <ng-template #tmpl let-name let-location="location">
+      {{ name }} : {{ location }}
+    </ng-template>
   `
 })
 export class AppComponent implements AfterViewInit {
@@ -18,7 +19,9 @@ export class AppComponent implements AfterViewInit {
 
 
   ngAfterViewInit(): void {
-    const view = this.tmpl.createEmbeddedView(null);
-    this.entry.insert(view);
+    this.entry.createEmbeddedView(this.tmpl, {
+      $implicit: 'Motto Todd',
+      location: 'UK, England'
+    });
   }
 }
