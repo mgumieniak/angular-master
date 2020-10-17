@@ -21,5 +21,4 @@ export class AppComponent implements AfterViewInit {
     const view = this.tmpl.createEmbeddedView(null);
     this.entry.insert(view);
   }
-
 }
