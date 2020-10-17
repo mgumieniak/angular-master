@@ -1,22 +1,42 @@
-import {AfterViewInit, Component, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-root',
+  changeDetection: ChangeDetectionStrategy.Default,
   template: `
     <div>
-      <ng-container
-        [ngTemplateOutlet]="tmpl"
-        [ngTemplateOutletContext]="ctx">
-      </ng-container>
+      <button (click)="addProp()">Add property</button>
+      <button (click)="changeUser()">Change user object</button>
+      <button (click)="changeName()">Change name property</button>
+      <div class="users">
+        <p>First comp: ChangeDetectionStrategy.OnPush</p>
+        <example-one [user]="user"></example-one>
+        <p>Second comp: ChangeDetectionStrategy.Default</p>
+        <example-two [user]="user"></example-two>
+      </div>
     </div>
-    <ng-template #tmpl let-name let-location="location">
-      {{ name }} : {{ location }}
-    </ng-template>
   `
 })
 export class AppComponent {
-  ctx = {
-    $implicit: 'Todd Motto',
-    location: 'England, UK'
+  user: any = {
+    name: 'Mark Hoppus',
+    age: 44,
+    location: 'California'
   };
+
+  addProp() {
+    this.user.email = 'blink@blink-182.net';
+  }
+
+  changeName() {
+    this.user.name = 'Travis Barker';
+  }
+
+  changeUser() {
+    this.user = {
+      name: 'Tom Delonge',
+      age: 41,
+      location: 'California'
+    };
+  }
 }
