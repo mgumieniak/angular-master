@@ -4,21 +4,15 @@ import {AfterViewInit, Component, TemplateRef, ViewChild, ViewContainerRef} from
   selector: 'app-root',
   template: `
     <div>
-      <ng-container #entry></ng-container>
-      <ng-template #tmpl>
-        Todd Motto : England, UK
-      </ng-template>
+      <ng-container
+        [ngTemplateOutlet]="tmpl">
+      </ng-container>
     </div>
+    <ng-template #tmpl>
+      Todd Motto : England, UK
+    </ng-template>
   `
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent {
 
-  @ViewChild('entry', {read: ViewContainerRef}) entry: ViewContainerRef;
-  @ViewChild('tmpl') tmpl: TemplateRef<any>;
-
-
-  ngAfterViewInit(): void {
-    const view = this.tmpl.createEmbeddedView(null);
-    this.entry.insert(view);
-  }
 }
